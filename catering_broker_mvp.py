@@ -89,4 +89,40 @@ class MarketBrokerAgent:
                 print(f"  ALERT: {item.upper()} ({ticker}) is SPIKING (${current_price:.2f}).")
                 
                 sub_price, sub_status = self.get_real_price(sub_ticker)
-                print(f"
+                print(f"  SWAPPING: Brokering deal for {sub.upper()} ({sub_ticker}) instead (${sub_price:.2f}).")
+                
+                total_cost += sub_price
+                final_basket.append(sub)
+            else:
+                print(f"  PURCHASING: {item} ({ticker}) at stable price (${current_price:.2f}).")
+                total_cost += current_price
+                final_basket.append(item)
+                
+            time.sleep(0.5)
+            
+        print(f"\n{self.name} Procurement Complete.")
+        print(f"   Final Cost: ${total_cost:.2f}")
+        print(f"   Optimized Basket: {final_basket}")
+
+
+# ==========================================
+# 3. THE MAIN WORKFLOW
+# ==========================================
+def main():
+    print("=========================================================")
+    print("AI CATERING BROKER: LIVE PROCUREMENT FEED INITIALIZED")
+    print("=========================================================\n")
+    
+    analyzer_bot = RecipeAnalyzerAgent()
+    broker_bot = MarketBrokerAgent()
+    
+    print("--- NEW CATERING CONTRACT RECEIVED ---")
+    dish_requested = "beef_stew"
+    
+    required_ingredients = analyzer_bot.breakdown_order(dish_requested)
+    
+    if required_ingredients:
+        broker_bot.procure_ingredients(required_ingredients)
+
+if __name__ == "__main__":
+    main()
