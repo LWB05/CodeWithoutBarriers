@@ -1,0 +1,14 @@
+{
+    "premium_beef": {
+        "ticker": "LE=F", 
+        "substitute": "pork_cuts"
+    },
+    "pork_cuts": {
+        "ticker": "HE=F", 
+        "substitute": null
+    },
+    "vegetable_base": {
+        "ticker": "ZC=F", 
+        "substitute": null
+    }
+}
